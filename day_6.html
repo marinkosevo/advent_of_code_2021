@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+<body>
+<textarea id="input_array" name="input" rows='30' cols="150"></textarea><br/>
+<input type="number" id="input_days" placeholder="Input number of days"><br/>
+<button  id="submit">Submit</button><br/>
+<input type="text" id="result" placeholder="Here you get the result..." disabled>
+
+</body>
+<script>
+    jQuery("#submit").on("click", function(){
+        var input = jQuery('#input_array').val();
+        var days = jQuery('#input_days').val();
+        var fishes = input.split(",");
+        var helper = [0,0,0,0,0,0,0,0,0];
+        var count = 0;
+        for(i=0; i<fishes.length; i++){
+            switch(fishes[i]) {
+                case '0':
+                    helper[0]++;
+                    break;
+                case '1':
+                    helper[1]++;
+                    break;
+                case '2':
+                    helper[2]++;
+                    break;
+                case '3':
+                    helper[3]++;
+                    break;
+                case '4':
+                    helper[4]++;
+                    break;
+                case '5':
+                    helper[5]++;
+                    break;
+                case '6':
+                    helper[6]++;
+                    break;
+                case '7':
+                    helper[7]++;
+                    break;
+                default:
+                    helper[8]++;
+                    break;
+            }
+        }
+        for(i=0; i<days; i++){
+            let newFish = helper[0]
+            helper[0] = helper[1]; 
+            helper[1] = helper[2]; 
+            helper[2] = helper[3]; 
+            helper[3] = helper[4]; 
+            helper[4] = helper[5]; 
+            helper[5] = helper[6]; 
+            helper[6] = newFish + helper[7]; 
+            helper[7] = helper[8]; 
+            helper[8] = newFish; 
+        }
+        for(i=0; i<helper.length;i++)
+            count += helper[i];
+        jQuery('#result').val(count);
+        });
+
+</script>
+
+</html>
+
+
+

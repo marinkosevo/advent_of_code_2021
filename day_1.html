@@ -18,7 +18,6 @@
     jQuery("#submit").on("click", function(){
         var input = jQuery('#input_array').val();
         var array = input.split("\n");
-        console.log(array.length);
         var counter = counter2 = a = b = 0;
         for(i=0;i<array.length;i++){
             if(parseInt(array[i])>parseInt(array[i-1])){

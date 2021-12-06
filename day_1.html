@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+<body>
+<textarea id="input_array" name="input" rows='30' cols="150"></textarea><br/>
+<button  id="submit">Submit</button><br/>
+<p>Increases number
+<input type="text" id="result" placeholder="Here you get the result..." disabled>    
+</p>
+<p>Increases number groups of 3
+<input type="text" id="result2" placeholder="Here you get the result..." disabled>    
+</p>
+
+</body>
+<script>
+    jQuery("#submit").on("click", function(){
+        var input = jQuery('#input_array').val();
+        var array = input.split("\n");
+        console.log(array.length);
+        var counter = counter2 = a = b = 0;
+        for(i=0;i<array.length;i++){
+            if(parseInt(array[i])>parseInt(array[i-1])){
+                counter++;
+            }
+        }
+        var newLen = array.length - (array.length%3);
+        for(i=0;i<array.length;i++){
+            a = parseInt(array[i]) + parseInt(array[i+1]) + parseInt(array[i+2]); 
+            b = parseInt(array[i+1]) + parseInt(array[i+2]) + parseInt(array[i+3]); 
+            if(b>a){
+                counter2++;
+            }
+        }
+        jQuery('#result').val(counter);
+        jQuery('#result2').val(counter2);
+        });
+
+</script>
+
+</html>
+
+
+

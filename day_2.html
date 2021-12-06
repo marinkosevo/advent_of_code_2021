@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+<body>
+<textarea id="input_array" name="input" rows='30' cols="150"></textarea><br/>
+<button  id="submit">Submit</button><br/>
+<p>Horizontal position * depth
+<input type="text" id="result" placeholder="Here you get the result..." disabled>    
+</p>
+<p>Increases number groups of 3
+<input type="text" id="result2" placeholder="Here you get the result..." disabled>    
+</p>
+
+</body>
+<script>
+    jQuery("#submit").on("click", function(){
+        var input = jQuery('#input_array').val();
+        var array = input.split("\n");
+        var helper = [];
+        var h = d = h2 = d2 = a = 0;
+        //Part 1
+        for(i=0;i<array.length; i++){
+            helper = array[i].split(" ");
+            switch (helper[0]){
+                case 'forward':
+                    h += parseInt(helper[1]);
+                    break;
+                case 'down':
+                    d += parseInt(helper[1]);
+                    break;
+                default:
+                    d -= parseInt(helper[1]);
+                    break;
+            }
+        }
+        //Part 2
+        for(i=0;i<array.length; i++){
+            helper = array[i].split(" ");
+            switch (helper[0]){
+                case 'forward':
+                    h2 += parseInt(helper[1]);
+                    d2 += a*parseInt(helper[1]);
+                    break;
+                case 'down':
+                    a += parseInt(helper[1]);
+                    break;
+                default:
+                    a -= parseInt(helper[1]);
+                    break;
+            }
+        }
+        jQuery('#result').val(h*d);
+        jQuery('#result2').val(h2*d2);
+        });
+
+</script>
+
+</html>
+
+
+

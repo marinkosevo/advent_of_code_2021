@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+<body>
+<textarea id="input_array" name="input" rows='30' cols="150"></textarea><br/>
+<button  id="submit">Submit</button><br/>
+<p>Power consumption
+<input type="text" id="result" placeholder="Here you get the result..." disabled>    
+</p>
+<p>Life support rating
+<input type="text" id="result2" placeholder="Here you get the result..." disabled>    
+</p>
+
+</body>
+<script>
+    jQuery("#submit").on("click", function(){
+        var input = jQuery('#input_array').val();
+        var array = array2 = input.split("\n");
+
+        var helper = helper2 = [];
+        var gamma = epsilon = oxygen = co2 = '';
+        //Part 1
+        for(i=0;i<array.length; i++){
+            for(j=0;j<array[i].length;j++){
+                if(i==0)
+                    helper[j] = [0,0];
+                array[i][j] == '0' ? helper[j][0]++ : helper[j][1]++ ;
+            }
+        }
+        for(i=0;i<helper.length;i++){
+            gamma += helper[i][0] > helper[i][1] ? '0' : '1';
+            epsilon += helper[i][0] < helper[i][1] ? '0' : '1'
+        }
+        //Part 2
+        var cursor = cursor2 = bigger = 0;
+         
+        while(array.length > 1){
+            helper2[cursor] = [0,0];
+            for(i=0; i<array.length; i++){
+                array[i][cursor] == '0' ? helper2[cursor][0]++ : helper2[cursor][1]++ ;
+            }
+            if(helper2[cursor][1] >= helper2[cursor][0])
+                bigger = 1;
+            else
+                bigger = 0;
+
+            array = array.filter(function(element, index){
+                return parseInt(element[cursor]) == bigger;
+            });
+            cursor++;
+        }
+        oxygen = array[0];
+        cursor = 0;
+        while(array2.length > 1){
+            helper2[cursor] = [0,0];
+            for(i=0; i<array2.length; i++){
+                array2[i][cursor] == '0' ? helper2[cursor][0]++ : helper2[cursor][1]++ ;
+            }
+            if(helper2[cursor][1] >= helper2[cursor][0])
+                bigger = 1;
+            else
+                bigger = 0;
+
+            array2 = array2.filter(function(element, index){
+                return parseInt(element[cursor]) != bigger;
+            });
+            cursor++;
+        }
+        co2 = array2[0];
+        jQuery('#result').val(parseInt(gamma, 2) * parseInt(epsilon, 2));
+        jQuery('#result2').val(parseInt(oxygen, 2) * parseInt(co2, 2));
+        });
+
+</script>
+
+</html>
